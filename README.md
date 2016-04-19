@@ -1,2 +1,2 @@
-# CusTomView_Animator
+# CustomView_Animator
 a repository for customView $ Animator
