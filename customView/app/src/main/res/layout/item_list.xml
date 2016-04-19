@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="Adapter学习"
+        android:textColor="#444"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="每天学习一点"
+        android:textColor="#898989"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_desc"
+        android:layout_marginTop="10dp"
+        android:paddingTop="3dp"
+        android:text="2016-04-02"
+        android:textColor="#898989"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_desc"
+        android:layout_marginTop="10dp"
+        android:background="#3ED667"
+        android:drawableLeft="@mipmap/ic_search_all_users"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="xsf"
+        android:textColor="#ffffff"
+        android:textSize="12sp"/>
+
+
+</RelativeLayout>
