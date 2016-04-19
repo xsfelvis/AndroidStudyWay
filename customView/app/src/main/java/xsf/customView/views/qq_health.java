@@ -33,6 +33,8 @@ public class qq_health extends View {
     private Context mContext;
 
 
+
+
     public qq_health(Context context) {
         super(context);
     }
