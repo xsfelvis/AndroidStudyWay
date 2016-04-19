@@ -1,4 +1,4 @@
-package xsf.adapterstudy;
+package xsf.customView;
 
 import org.junit.Test;
 

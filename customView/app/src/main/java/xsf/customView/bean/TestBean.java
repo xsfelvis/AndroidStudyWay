@@ -1,4 +1,4 @@
-package xsf.adapterstudy.bean;
+package xsf.customView.bean;
 
 /**
  * @author xushangfei

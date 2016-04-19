@@ -1,9 +1,9 @@
-package xsf.adapterstudy;
+package xsf.customView;
 
 import android.os.Bundle;
 import android.view.View;
 
-import xsf.adapterstudy.base.BaseActvity;
+import xsf.customView.base.BaseActvity;
 
 public class MainActivity extends BaseActvity {
 
