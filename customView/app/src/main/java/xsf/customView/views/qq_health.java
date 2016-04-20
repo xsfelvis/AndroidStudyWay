@@ -1,5 +1,6 @@
 package xsf.customView.views;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,6 +47,9 @@ public class qq_health extends View {
     private int[] mSteps;
     private float mRatio;
 
+    private int step = 25;
+    private ValueAnimator stepAnimator;
+
     private Context mContext;
 
     private int mDefaultThemeColor;//默认主题色
@@ -79,7 +83,7 @@ public class qq_health extends View {
         setLayerType(LAYER_TYPE_SOFTWARE, null);//关闭硬件加速
         mRatio = 450.f / 525.f;//宽高比
         mBackgroundCorner = Utils.dp2px(mContext, 8);
-        mDefaultThemeColor = Color.parseColor("#2EC3FD");
+        mDefaultThemeColor = Color.parseColor("#2EC3FD");//蓝色
         mDefaultUpBackgroundColor = Color.WHITE;
         mThemeColor = mDefaultThemeColor;
         mUpBackgroundColor = mDefaultUpBackgroundColor;
@@ -122,7 +126,17 @@ public class qq_health extends View {
         mAvatarPaint = new Paint();
         mAvatarPaint.setAntiAlias(true);
 
-
+        //步数的动画
+        stepAnimator = ValueAnimator.ofInt(0, mSteps[mSteps.length - 1]);
+        stepAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                step = (int) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+        stepAnimator.setDuration(1000);
+        stepAnimator.start();
     }
 
 
@@ -169,20 +183,21 @@ public class qq_health extends View {
     protected void onDraw(Canvas canvas) {
 
         //绘制最下层背景
+        mBackgroundPaint.setColor(mThemeColor);
         drawBelowBackground(0, 0, mWidth, mHeight, mBackgroundCorner, canvas, mBackgroundPaint);
         //绘制上层的背景
         mBackgroundPaint.setColor(mUpBackgroundColor);
         drawUpBackground(0, 0, mWidth, mWidth, mBackgroundCorner, canvas, mBackgroundPaint);
 
         //绘制圆弧
-        //水平x轴为0度，顺时针方向，下面表示起始位置为120度，顺时针扫过300度方向
-        canvas.drawArc(mArcRect, 120, 300, false, mArcPaint);
 
-        //绘制圆弧内部的文字
-        drawArcText(mArcCenterX, mArcCenterY, canvas, mTextPaint);
+        // canvas.drawArc(mArcRect, 120, 300, false, mArcPaint);
+
+        //绘制圆弧及内部的文字
+        drawArcAndText(mArcCenterX, mArcCenterY, canvas, mTextPaint);
 
         //绘制圆弧下方的文字及虚线
-        drawOutArcText(mArcCenterX, mArcCenterY, canvas, mTextPaint);
+        drawOutArcText(canvas, mTextPaint);
         //绘制下面的线条
         drawBars(canvas, mTextPaint);
 
@@ -196,6 +211,7 @@ public class qq_health extends View {
         float xPos = 100.f / 450.f * mWidth;
         float yPos = (mHeight - mWidth) / 2.f + mWidth + 20.f / 450.f * mWidth / 2;
         mTextPaint.setColor(Color.WHITE);
+        //mTextPaint.setColor(Color.GREEN);
         mTextPaint.setTextSize(20.f / 450.f * mWidth);
         mTextPaint.setTextAlign(Paint.Align.LEFT);//绘制文字焦点在左边
         canvas.drawText("xsfelvis今日获得冠军", xPos, yPos, mTextPaint);
@@ -257,7 +273,7 @@ public class qq_health extends View {
 
     }
 
-    private void drawOutArcText(float mArcCenterX, float mArcCenterY, Canvas canvas, Paint mTextPaint) {
+    private void drawOutArcText(Canvas canvas, Paint mTextPaint) {
         float xPos = 25.f / 450.f * mWidth;
         float yPos = 320.f / 525.f * mHeight;
         mTextPaint.setTextAlign(Paint.Align.LEFT);//绘制文字焦点在左边
@@ -282,9 +298,13 @@ public class qq_health extends View {
 
     }
 
-    private void drawArcText(float mArcCenterX, float mArcCenterY, Canvas canvas, Paint mTextPaint) {
+    private void drawArcAndText(int mArcCenterX, int mArcCenterY, Canvas canvas, Paint mTextPaint) {
         float xPos = mArcCenterX;
         float yPos = mArcCenterY - 45.f / 525.f * mHeight;
+
+        //水平x轴为0度，顺时针方向，下面表示起始位置为120度，顺时针扫过300度方向
+        canvas.drawArc(mArcRect, 120, 300, false, mArcPaint);
+
         mTextPaint.setTextAlign(Paint.Align.CENTER);//绘制文字在基准点中央
         mTextPaint.setTextSize(15.f / 450.f * mWidth);
         mTextPaint.setColor(Color.parseColor("#C1C1C1"));
@@ -292,7 +312,8 @@ public class qq_health extends View {
 
         mTextPaint.setTextSize(42.f / 450.f * mWidth);
         mTextPaint.setColor(mThemeColor);
-        canvas.drawText(mSteps[mSteps.length - 1] + "", mArcCenterX, mArcCenterY, mTextPaint);
+
+        canvas.drawText(step + "", mArcCenterX, mArcCenterY, mTextPaint);
 
         mTextPaint.setColor(Color.parseColor("#C1C1C1"));
         mTextPaint.setTextSize(13.f / 450.f * mWidth);
@@ -311,6 +332,7 @@ public class qq_health extends View {
 
 
     }
+
 
     private void drawUpBackground(int left, int top, int right, int bottom, int radius, Canvas canvas, Paint paint) {
         Path path = new Path();
