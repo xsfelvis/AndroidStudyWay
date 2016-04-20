@@ -1,5 +1,6 @@
 package xsf.customView.views;
 
+import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -48,20 +49,14 @@ public class qq_health extends View {
     private float mRatio;
 
     private int step = 25;
-    private ValueAnimator stepAnimator;
+    private float percent = 0.5f;
 
     private Context mContext;
 
-    private int mDefaultThemeColor;//默认主题色
-    private int mDefaultUpBackgroundColor;//上层默认的背景色
 
     private int mThemeColor;
     private int mUpBackgroundColor;
-    private float mArcWidth;
-    private float mBarWidth;
-    private int mMaxStep;
     private int mAverageStep;
-    private int mTotalSteps;
 
 
     public qq_health(Context context) {
@@ -83,8 +78,8 @@ public class qq_health extends View {
         setLayerType(LAYER_TYPE_SOFTWARE, null);//关闭硬件加速
         mRatio = 450.f / 525.f;//宽高比
         mBackgroundCorner = Utils.dp2px(mContext, 8);
-        mDefaultThemeColor = Color.parseColor("#2EC3FD");//蓝色
-        mDefaultUpBackgroundColor = Color.WHITE;
+        int mDefaultThemeColor = Color.parseColor("#2EC3FD");//蓝色
+        int mDefaultUpBackgroundColor = Color.WHITE;
         mThemeColor = mDefaultThemeColor;
         mUpBackgroundColor = mDefaultUpBackgroundColor;
         mSteps = new int[]{10050, 15280, 8900, 9200, 6500, 5660, 9450};
@@ -126,8 +121,10 @@ public class qq_health extends View {
         mAvatarPaint = new Paint();
         mAvatarPaint.setAntiAlias(true);
 
+        AnimatorSet animatorSet = new AnimatorSet();
+
         //步数的动画
-        stepAnimator = ValueAnimator.ofInt(0, mSteps[mSteps.length - 1]);
+        ValueAnimator stepAnimator = ValueAnimator.ofInt(0, mSteps[mSteps.length - 1]);
         stepAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -135,8 +132,25 @@ public class qq_health extends View {
                 invalidate();
             }
         });
-        stepAnimator.setDuration(1000);
-        stepAnimator.start();
+        //  stepAnimator.setDuration(1000);
+        //stepAnimator.start();
+
+        //圆环动画
+        ValueAnimator percentAnimator = ValueAnimator.ofFloat(0, 1);
+        percentAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                percent = (float) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+        // percentAnimator.setDuration(1000);
+        // percentAnimator.start();
+        animatorSet.setDuration(1000);
+        animatorSet.playTogether(stepAnimator, percentAnimator);
+        animatorSet.start();
+
+
     }
 
 
@@ -150,12 +164,12 @@ public class qq_health extends View {
         if (widthMode == MeasureSpec.EXACTLY || widthMode == MeasureSpec.AT_MOST) {
             width = widthSize;
         } else {
-            width = defaultWidth;
+            width = defaultWidth;//显示满
         }
         int defaultHeight = (int) (width * 1.f / mRatio);
         height = defaultHeight;
         setMeasuredDimension(width, height);
-        Log.i(TAG, "width:" + width + "| height:" + height);
+        // Log.i(TAG, "width:" + width + "| height:" + height);
     }
 
     @Override
@@ -163,6 +177,7 @@ public class qq_health extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth = w;
         mHeight = h;
+        Log.d("xsf", "w: " + w + "   h:   " + h);
         mArcCenterX = (int) (mWidth / 2.f);
         mArcCenterY = (int) (160.f / 525.f * mHeight);
         mArcRect = new RectF();
@@ -171,8 +186,8 @@ public class qq_health extends View {
         mArcRect.right = mArcCenterX + 125.f / 450.f * mWidth;
         mArcRect.bottom = mArcCenterY + 125.f / 525.f * mHeight;
 
-        mArcWidth = 20.f / 450.f * mWidth;
-        mBarWidth = 16.f / 450.f * mWidth;
+        float mArcWidth = 20.f / 450.f * mWidth;
+        float mBarWidth = 16.f / 450.f * mWidth;
 
         //设置画笔宽度
         mArcPaint.setStrokeWidth(mArcWidth);
@@ -303,7 +318,7 @@ public class qq_health extends View {
         float yPos = mArcCenterY - 45.f / 525.f * mHeight;
 
         //水平x轴为0度，顺时针方向，下面表示起始位置为120度，顺时针扫过300度方向
-        canvas.drawArc(mArcRect, 120, 300, false, mArcPaint);
+        canvas.drawArc(mArcRect, 120, 300 * percent, false, mArcPaint);
 
         mTextPaint.setTextAlign(Paint.Align.CENTER);//绘制文字在基准点中央
         mTextPaint.setTextSize(15.f / 450.f * mWidth);
@@ -403,8 +418,8 @@ public class qq_health extends View {
      * 计算本周总共步数,最大步数，平均步数
      */
     private void calaulateStep() {
-        mTotalSteps = 0;
-        mMaxStep = 0;
+        int mTotalSteps = 0;
+        int mMaxStep = 0;
         mAverageStep = 0;
         for (int i = 0; i < mSteps.length; i++) {
             mTotalSteps += mSteps[i];

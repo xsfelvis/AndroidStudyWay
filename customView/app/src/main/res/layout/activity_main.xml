@@ -18,10 +18,10 @@
         android:text="qq_Health"/>
 
     <Button
-        android:id="@+id/btn_multitype"
+        android:id="@+id/btn_more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_qqhealth"
-        android:text="multitype"/>
+        android:text="more"/>
 
 </RelativeLayout>
