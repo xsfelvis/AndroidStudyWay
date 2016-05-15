@@ -16,7 +16,6 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -177,7 +176,7 @@ public class qq_health extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth = w;
         mHeight = h;
-        Log.d("xsf", "w: " + w + "   h:   " + h);
+       // Log.d("xsf", "w: " + w + "   h:   " + h);
         mArcCenterX = (int) (mWidth / 2.f);
         mArcCenterY = (int) (160.f / 525.f * mHeight);
         mArcRect = new RectF();

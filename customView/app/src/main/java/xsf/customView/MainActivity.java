@@ -18,6 +18,7 @@ public class MainActivity extends BaseActvity {
     private void inintViews() {
         findViewById(R.id.btn_qqhealth).setOnClickListener(this);
         findViewById(R.id.btn_more).setOnClickListener(this);
+        findViewById(R.id.btn_stateliteMenu).setOnClickListener(this);
     }
 
     @Override
@@ -27,8 +28,11 @@ public class MainActivity extends BaseActvity {
             case R.id.btn_qqhealth:
                 launch(TestActivity1.class);
                 break;
+            case R.id.btn_stateliteMenu:
+                launch(StatelliteActivity.class);
+                break;
             case R.id.btn_more:
-                launch(TestActivity2.class);
+                launch(TestActivity3.class);
                 break;
 
         }
