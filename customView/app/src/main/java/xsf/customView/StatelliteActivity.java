@@ -97,7 +97,6 @@ public class StatelliteActivity extends BaseActvity {
      */
     private void btnItemCloseAnimator(View btnItem, int index, int total, int radius) {
 
-
         double degree = Math.PI * index / ((total - 1) * 2);
         int translationX = -(int) (radius * Math.sin(degree));
         int translationY = -(int) (radius * Math.cos(degree));
