@@ -85,7 +85,6 @@ public class StatelliteActivity extends BaseActvity {
             btnItemCloseAnimator(btnItem4, 3, 5, 300);
             btnItemCloseAnimator(btnItem5, 4, 5, 300);
         }
-
     }
 
     /**
