@@ -7,6 +7,6 @@ a repository for customView & Animator
 ![](https://github.com/xsfelvis/CusTomView_Animator/blob/master/customView/screenshot/qqhealth.gif) 
 
 ##StatelliteMenu
->
+>more details can refer to my blog http://blog.csdn.net/XSF50717/article/details/51419258
 >img<p>
 ![](https://github.com/xsfelvis/CusTomView_Animator/blob/master/customView/screenshot/statelliteMenu.gif) 
