@@ -10,3 +10,9 @@ a repository for customView & Animator
 >more details can refer to my blog http://blog.csdn.net/XSF50717/article/details/51419258<p>
 >img<p>
 ![](https://github.com/xsfelvis/CusTomView_Animator/blob/master/customView/screenshot/statelliteMenu.gif) 
+
+##DBLoading
+learn from other blog,easy but the angel
+
+##searchLaoding
+pathMeasure ; Handler to contrl different states wonderful example!
