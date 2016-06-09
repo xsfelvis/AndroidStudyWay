@@ -23,11 +23,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_qqhealth"
         android:text="stateliteMenu"/>
+
     <Button
         android:id="@+id/btn_more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_stateliteMenu"
-        android:text="more"/>
+        android:text="DBLoading"/>
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_more"
+        android:text="DBLoading"/>
 
 </RelativeLayout>

@@ -16,6 +16,7 @@ public class MainActivity extends BaseActvity {
         findViewById(R.id.btn_qqhealth).setOnClickListener(this);
         findViewById(R.id.btn_more).setOnClickListener(this);
         findViewById(R.id.btn_stateliteMenu).setOnClickListener(this);
+        IfindViewById(R.id.btn_search).setOnClickListener(this);
     }
 
 
@@ -30,6 +31,9 @@ public class MainActivity extends BaseActvity {
                 launchActvity(StatelliteActivity.class);
                 break;
             case R.id.btn_more:
+                launchActvity(TestActivity3.class);
+                break;
+            case R.id.btn_search:
                 launchActvity(TestActivity3.class);
                 break;
 
