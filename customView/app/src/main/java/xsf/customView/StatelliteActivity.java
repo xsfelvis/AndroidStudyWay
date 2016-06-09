@@ -2,7 +2,6 @@ package xsf.customView;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.os.Bundle;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.widget.Button;
@@ -16,13 +15,12 @@ public class StatelliteActivity extends BaseActvity {
     private boolean isMenuOpen = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statellite);
-        initViews();
+    protected int setLayoutResourceId() {
+        return R.layout.activity_statellite;
     }
 
-    private void initViews() {
+    @Override
+    protected void initView() {
         btnMenu = (Button) findViewById(R.id.btnMenu);
         btnMenu.setOnClickListener(this);
         btnItem1 = (Button) findViewById(R.id.btnItem1);
@@ -37,6 +35,7 @@ public class StatelliteActivity extends BaseActvity {
         btnItem5 = (Button) findViewById(R.id.btnItem5);
         btnItem5.setOnClickListener(this);
     }
+    
 
     @Override
     public void onClick(View v) {

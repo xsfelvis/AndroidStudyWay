@@ -1,38 +1,36 @@
 package xsf.customView;
 
-import android.os.Bundle;
 import android.view.View;
 
 import xsf.customView.base.BaseActvity;
 
 public class MainActivity extends BaseActvity {
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        inintViews();
+    protected int setLayoutResourceId() {
+        return R.layout.activity_main;
     }
 
-    private void inintViews() {
+    @Override
+    protected void initView() {
         findViewById(R.id.btn_qqhealth).setOnClickListener(this);
         findViewById(R.id.btn_more).setOnClickListener(this);
         findViewById(R.id.btn_stateliteMenu).setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.btn_qqhealth:
-                launch(TestActivity1.class);
+                launchActvity(TestActivity1.class);
                 break;
             case R.id.btn_stateliteMenu:
-                launch(StatelliteActivity.class);
+                launchActvity(StatelliteActivity.class);
                 break;
             case R.id.btn_more:
-                launch(TestActivity3.class);
+                launchActvity(TestActivity3.class);
                 break;
 
         }
