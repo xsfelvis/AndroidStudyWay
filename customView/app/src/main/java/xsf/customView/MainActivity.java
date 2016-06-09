@@ -13,9 +13,9 @@ public class MainActivity extends BaseActvity {
 
     @Override
     protected void initView() {
-        findViewById(R.id.btn_qqhealth).setOnClickListener(this);
-        findViewById(R.id.btn_more).setOnClickListener(this);
-        findViewById(R.id.btn_stateliteMenu).setOnClickListener(this);
+        IfindViewById(R.id.btn_qqhealth).setOnClickListener(this);
+        IfindViewById(R.id.btn_more).setOnClickListener(this);
+        IfindViewById(R.id.btn_stateliteMenu).setOnClickListener(this);
         IfindViewById(R.id.btn_search).setOnClickListener(this);
     }
 
@@ -34,7 +34,7 @@ public class MainActivity extends BaseActvity {
                 launchActvity(TestActivity3.class);
                 break;
             case R.id.btn_search:
-                launchActvity(TestActivity3.class);
+                launchActvity(TestActivity4.class);
                 break;
 
         }

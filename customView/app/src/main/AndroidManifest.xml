@@ -15,14 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity1">
-        </activity>
-        <activity android:name=".TestActivity2">
-        </activity>
-        <activity android:name=".StatelliteActivity">
-        </activity>
-        <activity android:name=".TestActivity3">
-        </activity>
+        <activity android:name=".TestActivity1"/>
+        <activity android:name=".TestActivity2"/>
+        <activity android:name=".StatelliteActivity"/>
+        <activity android:name=".TestActivity3"/>
+        <activity android:name=".TestActivity4"/>
+
     </application>
 
 </manifest>
