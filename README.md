@@ -1,4 +1,5 @@
-# CustomView_Animator
+# AndroidStudyWay
+
 a repository for customView & Animator
 
 ##QQ_HEALTH
